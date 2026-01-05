@@ -436,11 +436,16 @@ async function renderToday() {
                             // Add exercise GIF
                             const gifName = key === 'rdl' ? 'rdl' : key;
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
                                 alt: lift.title,
-                                style: 'max-width: 100%; height: auto; margin: 8px 0; border-radius: 8px; display: block;',
+                                style: 'max-width: 100%; height: auto; margin: 8px 0; border-radius: 8px; display: none;',
+                                loading: 'lazy',
                                 onerror: function() {
                                     this.style.display = 'none';
+                                    this.onerror = null;
+                                },
+                                onload: function() {
+                                    this.style.display = 'block';
                                 }
                             });
                             liftDiv.appendChild(img);
@@ -1319,11 +1324,16 @@ function renderWorkoutGuide() {
         // Add exercise GIF
         const gifName = key === 'stepDowns' ? 'step-downs' : key === 'bandWalks' ? 'band-walks' : key === 'wallSit' ? 'wall-sit' : key;
         const img = createElement('img', {
-            src: `/pwa/exercises/${gifName}.gif`,
+            src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
             alt: exercise.title,
-            style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: block;',
+            style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: none;',
+            loading: 'lazy',
             onerror: function() {
                 this.style.display = 'none';
+                this.onerror = null;
+            },
+            onload: function() {
+                this.style.display = 'block';
             }
         });
         exCard.appendChild(img);
@@ -1362,11 +1372,16 @@ function renderWorkoutGuide() {
         // Add exercise GIF
         const gifName = key === 'hips9090' ? 'hips-9090' : key === 'hamstringFloss' ? 'hamstring-floss' : key === 'ankleRocks' ? 'ankle-rocks' : key === 'calfStretch' ? 'calf-stretch' : key === 'couchStretch' ? 'couch-stretch' : key;
         const img = createElement('img', {
-            src: `/pwa/exercises/${gifName}.gif`,
+            src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
             alt: exercise.title,
-            style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: block;',
+            style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: none;',
+            loading: 'lazy',
             onerror: function() {
                 this.style.display = 'none';
+                this.onerror = null;
+            },
+            onload: function() {
+                this.style.display = 'block';
             }
         });
         exCard.appendChild(img);

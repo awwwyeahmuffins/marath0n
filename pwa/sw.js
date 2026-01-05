@@ -1,6 +1,6 @@
 // Service worker for offline support
 
-const CACHE_NAME = 'marathon-tracker-v1';
+const CACHE_NAME = 'marathon-tracker-v2';
 // Get base path for GitHub Pages
 const getBasePath = () => {
     // If we're on GitHub Pages, the path includes the repo name
