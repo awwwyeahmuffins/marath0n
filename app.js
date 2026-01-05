@@ -78,7 +78,7 @@ async function renderRoute() {
                 await renderToday();
                 break;
             case 'log':
-                renderLog(logPrefill);
+                renderLog(logPrefill || {});
                 logPrefill = null;
                 break;
             case 'plan':
@@ -95,9 +95,10 @@ async function renderRoute() {
         }
     } catch (error) {
         console.error('Render route error:', error);
+        console.error('Error stack:', error.stack);
         const app = document.getElementById('app');
         if (app) {
-            app.innerHTML = '<div class="view"><h1>Error</h1><p>Failed to render view.</p><p style="color: red; font-size: 14px;">' + error.message + '</p></div>';
+            app.innerHTML = '<div class="view"><h1>Error</h1><p>Failed to render view.</p><p style="color: red; font-size: 14px;">' + (error.message || String(error)) + '</p><p style="font-size: 12px; margin-top: 8px;">Check console for details.</p></div>';
         }
     }
 }
@@ -175,7 +176,7 @@ async function renderToday() {
     }
     
     const today = getDateString(new Date());
-    const todayItems = getTodayItems(today, startDate, longRunDay);
+    const todayItems = getTodayItems(today, startDate, longRunDay) || [];
     const week = getWeekNumber(today, startDate);
     
     // Get logged activities for today
@@ -320,7 +321,7 @@ async function renderToday() {
                 }
                 
                 // Add exercise GIF/image if available (for non-run exercises)
-                if (item.kind !== 'run') {
+                if (item && item.kind && item.kind !== 'run') {
                     const imageContainer = createElement('div', {
                         style: 'margin: 12px 0; text-align: center;'
                     });
@@ -332,9 +333,13 @@ async function renderToday() {
                             const img = createElement('img', {
                                 src: `pwa/exercises/${gifName}.gif`,
                                 alt: gifName,
-                                style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px;',
+                                style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
                                 onerror: function() {
                                     this.style.display = 'none';
+                                    this.onerror = null; // Prevent repeated errors
+                                },
+                                onload: function() {
+                                    this.style.display = 'block';
                                 }
                             });
                             imageContainer.appendChild(img);
@@ -346,9 +351,13 @@ async function renderToday() {
                             const img = createElement('img', {
                                 src: `pwa/exercises/${gifName}.gif`,
                                 alt: gifName,
-                                style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px;',
+                                style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
                                 onerror: function() {
                                     this.style.display = 'none';
+                                    this.onerror = null; // Prevent repeated errors
+                                },
+                                onload: function() {
+                                    this.style.display = 'block';
                                 }
                             });
                             imageContainer.appendChild(img);
@@ -411,7 +420,7 @@ async function renderToday() {
                 // For lifts, show all exercises
                 if (item.kind === 'lift' && typeof guideInfo === 'object' && !guideInfo.description) {
                     Object.entries(guideInfo).forEach(([key, lift]) => {
-                        if (lift.title) {
+                        if (lift && lift.title) {
                             const liftDiv = createElement('div', {
                                 style: 'margin: 12px 0; padding: 10px; background: var(--bg-color); border-radius: 6px;'
                             });
