@@ -2,20 +2,20 @@
   "name": "Marathon Training Tracker",
   "short_name": "Marathon Tracker",
   "description": "300-day marathon training plan tracker",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F2F2F7",
   "theme_color": "#007AFF",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/pwa/icon-192.png",
+      "src": "pwa/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/pwa/icon-512.png",
+      "src": "pwa/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

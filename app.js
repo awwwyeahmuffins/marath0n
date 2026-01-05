@@ -330,7 +330,7 @@ async function renderToday() {
                         const kneeGifs = ['wall-sit', 'step-downs', 'soleus', 'band-walks'];
                         kneeGifs.forEach(gifName => {
                             const img = createElement('img', {
-                                src: `/pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif`,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px;',
                                 onerror: function() {
@@ -344,7 +344,7 @@ async function renderToday() {
                         const mobilityGifs = ['couch-stretch', 'calf-stretch', 'hamstring-floss', 'ankle-rocks', 'hips-9090'];
                         mobilityGifs.forEach(gifName => {
                             const img = createElement('img', {
-                                src: `/pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif`,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px;',
                                 onerror: function() {
@@ -423,7 +423,7 @@ async function renderToday() {
                             // Add exercise GIF
                             const gifName = key === 'rdl' ? 'rdl' : key;
                             const img = createElement('img', {
-                                src: `/pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif`,
                                 alt: lift.title,
                                 style: 'max-width: 100%; height: auto; margin: 8px 0; border-radius: 8px; display: block;',
                                 onerror: function() {
@@ -1257,7 +1257,7 @@ function renderWorkoutGuide() {
         // Add exercise GIF
         const gifName = key === 'rdl' ? 'rdl' : key;
                             const img = createElement('img', {
-                                src: `/pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif`,
                                 alt: lift.title,
                                 style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: block;',
                                 onerror: function() {

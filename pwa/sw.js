@@ -1,16 +1,28 @@
 // Service worker for offline support
 
 const CACHE_NAME = 'marathon-tracker-v1';
+// Get base path for GitHub Pages
+const getBasePath = () => {
+    // If we're on GitHub Pages, the path includes the repo name
+    const path = self.location.pathname;
+    if (path.includes('/marath0n/')) {
+        return '/marath0n/';
+    }
+    return '/';
+};
+
+const BASE_PATH = getBasePath();
+
 const STATIC_ASSETS = [
-    '/index.html',
-    '/styles.css',
-    '/app.js',
-    '/db.js',
-    '/plan.js',
-    '/stats.js',
-    '/workouts.js',
-    '/ui.js',
-    '/pwa/manifest.json'
+    BASE_PATH + 'index.html',
+    BASE_PATH + 'styles.css',
+    BASE_PATH + 'app.js',
+    BASE_PATH + 'db.js',
+    BASE_PATH + 'plan.js',
+    BASE_PATH + 'stats.js',
+    BASE_PATH + 'workouts.js',
+    BASE_PATH + 'ui.js',
+    BASE_PATH + 'pwa/manifest.json'
 ];
 
 // Install event - cache static assets
@@ -63,7 +75,7 @@ self.addEventListener('fetch', (event) => {
             .catch(() => {
                 // If both cache and network fail, return offline page if it's a navigation request
                 if (event.request.mode === 'navigate') {
-                    return caches.match('/index.html');
+                    return caches.match(BASE_PATH + 'index.html');
                 }
             })
     );
