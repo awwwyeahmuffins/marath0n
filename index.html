@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#007AFF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Marathon Tracker">
+    <link rel="manifest" href="/pwa/manifest.json">
+    <!-- <link rel="apple-touch-icon" href="/pwa/icon-192.png"> -->
+    <title>Marathon Training Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <!--
+    ============================================================================
+    MARATHON TRAINING TRACKER - README
+    ============================================================================
+    
+    LOCAL DEVELOPMENT:
+    - Option 1: Open index.html directly in a browser (some features may be limited)
+    - Option 2: Run a simple static server:
+        python3 -m http.server 8000
+        Then visit http://localhost:8000
+    
+    DEPLOYMENT (Static Site Hosting):
+    
+    CLOUDFLARE PAGES:
+    1. Connect your Git repository to Cloudflare Pages
+    2. Build command: (leave empty)
+    3. Build output directory: / (root)
+    4. Deploy
+    
+    GITHUB PAGES:
+    1. Push code to a GitHub repository
+    2. Go to Settings > Pages
+    3. Source: Deploy from a branch (main/master)
+    4. Branch: main (or master), folder: / (root)
+    5. Save and wait for deployment
+    
+    NETLIFY:
+    1. Drag and drop the entire folder to netlify.com/drop
+    2. OR connect your Git repository
+    3. Build command: (leave empty)
+    4. Publish directory: . (current directory)
+    5. Deploy
+    
+    PWA INSTALL ON IPHONE:
+    1. Open the app in Safari (not Chrome)
+    2. Tap the Share button (square with arrow)
+    3. Scroll down and tap "Add to Home Screen"
+    4. Tap "Add" to confirm
+    5. The app will now appear on your home screen and work offline
+    
+    ============================================================================
+    -->
+</head>
+<body>
+    <main id="app"></main>
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="#/today" class="nav-item" data-route="today">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Today</span>
+        </a>
+        <a href="#/log" class="nav-item" data-route="log">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Log</span>
+        </a>
+        <a href="#/plan" class="nav-item" data-route="plan">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">Plan</span>
+        </a>
+        <a href="#/stats" class="nav-item" data-route="stats">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Stats</span>
+        </a>
+        <a href="#/settings" class="nav-item" data-route="settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
+        </a>
+    </nav>
+    
+    <script src="db.js"></script>
+    <script src="plan.js"></script>
+    <script src="stats.js"></script>
+    <script src="workouts.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+    
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/pwa/sw.js')
+                    .catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
+

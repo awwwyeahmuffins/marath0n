@@ -1,0 +1,682 @@
+/* Mobile-first CSS for iPhone 16 Pro Max (430x932px) */
+
+:root {
+    --primary-color: #007AFF;
+    --secondary-color: #5856D6;
+    --success-color: #34C759;
+    --warning-color: #FF9500;
+    --danger-color: #FF3B30;
+    --bg-color: #F2F2F7;
+    --surface-color: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #6D6D70;
+    --border-color: #C6C6C8;
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    padding-bottom: calc(60px + var(--safe-area-bottom));
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    padding: 16px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    padding-bottom: var(--safe-area-bottom);
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    flex: 1;
+    min-height: 44px;
+    transition: color 0.2s;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
+}
+
+.nav-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.nav-label {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* View Container */
+.view {
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Headers */
+.view h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.view h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.view h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Cards */
+.card {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Quick Log Strip */
+.quick-log {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.quick-log-btn {
+    flex: 1 1 calc(50% - 4px);
+    min-width: calc(50% - 4px);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    min-height: 44px;
+    transition: background 0.2s;
+}
+
+.quick-log-btn:active {
+    background: #0051D5;
+}
+
+.quick-log-btn.secondary {
+    background: var(--secondary-color);
+}
+
+.quick-log-btn.secondary:active {
+    background: #3D3BB8;
+}
+
+/* Buttons */
+.btn {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    min-height: 44px;
+    transition: all 0.2s;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:active {
+    background: #0051D5;
+}
+
+.btn-secondary {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:active {
+    background: #E5E5EA;
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:active {
+    background: #D70015;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-group .btn {
+    flex: 1;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    min-height: 44px;
+    font-family: inherit;
+}
+
+.form-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.form-group input::-webkit-outer-spin-button,
+.form-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    min-height: auto;
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+/* Activity Type Selector */
+.activity-type-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.activity-type-btn {
+    flex: 1;
+    min-width: calc(33.333% - 6px);
+    padding: 12px 8px;
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    min-height: 44px;
+    transition: all 0.2s;
+}
+
+.activity-type-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Lift Entry */
+.lift-entry {
+    background: var(--bg-color);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.lift-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.lift-entry-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+/* Lists */
+.activity-list {
+    list-style: none;
+}
+
+.activity-item {
+    background: var(--surface-color);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-item.completed {
+    opacity: 0.6;
+}
+
+.activity-item.completed::after {
+    content: "✓";
+    color: var(--success-color);
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+/* Week View */
+.week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.week-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.day-header {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 10px 6px;
+    margin-bottom: 4px;
+}
+
+.day-cell {
+    background: var(--surface-color);
+    border-radius: 10px;
+    padding: 12px 10px;
+    min-height: 140px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.day-cell.today {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 2px 6px rgba(0, 122, 255, 0.2);
+}
+
+.day-cell .day-number {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.day-cell .activity {
+    font-size: 12px;
+    margin-bottom: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.day-cell .activity:hover {
+    background: #E5E5EA;
+    transform: translateY(-1px);
+}
+
+.day-cell .activity.completed {
+    background: var(--success-color);
+    color: white;
+}
+
+.day-cell .activity.completed:hover {
+    background: #28A745;
+}
+
+/* Stats */
+.stats-section {
+    margin-bottom: 24px;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.stats-table th,
+.stats-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stats-table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+.stats-table td {
+    font-size: 17px;
+}
+
+.trend-list {
+    list-style: none;
+    margin-top: 12px;
+}
+
+.trend-item {
+    padding: 12px;
+    background: var(--surface-color);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Progress Bars */
+.progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-item {
+    margin-bottom: 16px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.progress-bar-container {
+    height: 24px;
+    background: var(--bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 12px;
+    transition: width 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.progress-bar-fill.warning {
+    background: var(--warning-color);
+}
+
+.progress-bar-fill.success {
+    background: var(--success-color);
+}
+
+/* Banner */
+.banner {
+    background: var(--warning-color);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.banner strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 17px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+/* Settings */
+.settings-section {
+    margin-bottom: 24px;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-label {
+    font-size: 17px;
+}
+
+.settings-value {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.settings-toggle {
+    width: 51px;
+    height: 31px;
+    background: var(--border-color);
+    border-radius: 15.5px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.settings-toggle.active {
+    background: var(--primary-color);
+}
+
+.settings-toggle::after {
+    content: '';
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+}
+
+.settings-toggle.active::after {
+    transform: translateX(20px);
+}
+
+.collapsible {
+    margin-top: 12px;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.collapsible-content {
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+    display: none;
+}
+
+.collapsible-content.open {
+    display: block;
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+/* Workout Guide */
+.workout-guide-section {
+    margin-bottom: 24px;
+}
+
+.workout-card {
+    background: var(--bg-color);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.workout-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.workout-card h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 768px) {
+    main {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+

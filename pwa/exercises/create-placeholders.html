@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Exercise Placeholders</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .exercise { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        canvas { border: 1px solid #ddd; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Exercise GIF Placeholder Generator</h1>
+    <p>This creates simple animated placeholders. For real GIFs, download from Pixabay.</p>
+    
+    <div class="exercise">
+        <h3>Squat</h3>
+        <canvas id="squat" width="200" height="200"></canvas>
+        <button onclick="downloadCanvas('squat', 'squat.gif')">Download as GIF (requires manual conversion)</button>
+    </div>
+    
+    <script>
+        // Simple animation placeholders
+        // Note: Converting canvas to GIF requires a library
+        // For now, this is just a visual reference
+        
+        function drawSquat(canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 200, 200);
+            
+            // Simple stick figure squat animation
+            const time = Date.now() / 500;
+            const squatDepth = Math.sin(time) * 30;
+            
+            // Head
+            ctx.beginPath();
+            ctx.arc(100, 50 - squatDepth, 15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Body
+            ctx.beginPath();
+            ctx.moveTo(100, 65 - squatDepth);
+            ctx.lineTo(100, 120 - squatDepth);
+            ctx.stroke();
+            
+            // Legs (squatting)
+            ctx.beginPath();
+            ctx.moveTo(100, 120 - squatDepth);
+            ctx.lineTo(80, 150 + squatDepth);
+            ctx.moveTo(100, 120 - squatDepth);
+            ctx.lineTo(120, 150 + squatDepth);
+            ctx.stroke();
+            
+            // Arms
+            ctx.beginPath();
+            ctx.moveTo(100, 80 - squatDepth);
+            ctx.lineTo(120, 100 - squatDepth);
+            ctx.moveTo(100, 80 - squatDepth);
+            ctx.lineTo(80, 100 - squatDepth);
+            ctx.stroke();
+            
+            requestAnimationFrame(() => drawSquat(canvas));
+        }
+        
+        drawSquat(document.getElementById('squat'));
+        
+        function downloadCanvas(id, filename) {
+            alert('To create actual GIFs, use a tool like:\n- https://ezgif.com/canvas-to-gif\n- Or download from Pixabay: https://pixabay.com/gifs/search/');
+        }
+    </script>
+    
+    <p><strong>Better Option:</strong> Download real GIFs from <a href="https://pixabay.com/gifs/search/exercise/" target="_blank">Pixabay</a> - it's free and takes 5 minutes!</p>
+</body>
+</html>
+
