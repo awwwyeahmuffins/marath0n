@@ -4,6 +4,17 @@ let currentRoute = 'today';
 let currentWeekOffset = 0;
 let logPrefill = null;
 
+// Get base URL for assets (works for both local and GitHub Pages)
+function getBaseUrl() {
+    const path = window.location.pathname;
+    // If on GitHub Pages, path includes repo name (e.g., /marath0n/)
+    if (path.includes('/marath0n/')) {
+        return window.location.origin + '/marath0n/';
+    }
+    // Local development
+    return window.location.origin + '/';
+}
+
 // Initialize app
 async function init() {
     try {
@@ -330,17 +341,22 @@ async function renderToday() {
                         // Show knee exercise GIFs
                         const kneeGifs = ['wall-sit', 'step-downs', 'soleus', 'band-walks'];
                         kneeGifs.forEach(gifName => {
+                            // Construct absolute URL for GitHub Pages
+                            const gifUrl = `${getBaseUrl()}pwa/exercises/${gifName}.gif?t=${Date.now()}`;
+                            
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
+                                src: gifUrl,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
                                 loading: 'lazy',
                                 onerror: function() {
-                                    // Silently hide missing images - don't spam console
+                                    // Log for debugging
+                                    console.log('Failed to load GIF:', gifUrl, 'from:', window.location.href);
                                     this.style.display = 'none';
                                     this.onerror = null; // Prevent repeated errors
                                 },
                                 onload: function() {
+                                    console.log('Loaded GIF:', gifUrl);
                                     this.style.display = 'block';
                                 }
                             });
@@ -350,17 +366,22 @@ async function renderToday() {
                         // Show mobility exercise GIFs
                         const mobilityGifs = ['couch-stretch', 'calf-stretch', 'hamstring-floss', 'ankle-rocks', 'hips-9090'];
                         mobilityGifs.forEach(gifName => {
+                            // Construct absolute URL for GitHub Pages
+                            const gifUrl = `${getBaseUrl()}pwa/exercises/${gifName}.gif?t=${Date.now()}`;
+                            
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
+                                src: gifUrl,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
                                 loading: 'lazy',
                                 onerror: function() {
-                                    // Silently hide missing images - don't spam console
+                                    // Log for debugging
+                                    console.log('Failed to load GIF:', gifUrl, 'from:', window.location.href);
                                     this.style.display = 'none';
                                     this.onerror = null; // Prevent repeated errors
                                 },
                                 onload: function() {
+                                    console.log('Loaded GIF:', gifUrl);
                                     this.style.display = 'block';
                                 }
                             });
@@ -435,16 +456,19 @@ async function renderToday() {
                             
                             // Add exercise GIF
                             const gifName = key === 'rdl' ? 'rdl' : key;
+                            const gifUrl = `${getBaseUrl()}pwa/exercises/${gifName}.gif?t=${Date.now()}`;
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
+                                src: gifUrl,
                                 alt: lift.title,
                                 style: 'max-width: 100%; height: auto; margin: 8px 0; border-radius: 8px; display: none;',
                                 loading: 'lazy',
                                 onerror: function() {
+                                    console.log('Failed to load GIF:', gifUrl);
                                     this.style.display = 'none';
                                     this.onerror = null;
                                 },
                                 onload: function() {
+                                    console.log('Loaded GIF:', gifUrl);
                                     this.style.display = 'block';
                                 }
                             });
@@ -1323,16 +1347,19 @@ function renderWorkoutGuide() {
         
         // Add exercise GIF
         const gifName = key === 'stepDowns' ? 'step-downs' : key === 'bandWalks' ? 'band-walks' : key === 'wallSit' ? 'wall-sit' : key;
+        const gifUrl = `${getBaseUrl()}pwa/exercises/${gifName}.gif?t=${Date.now()}`;
         const img = createElement('img', {
-            src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
+            src: gifUrl,
             alt: exercise.title,
             style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: none;',
             loading: 'lazy',
             onerror: function() {
+                console.log('Failed to load GIF:', gifUrl);
                 this.style.display = 'none';
                 this.onerror = null;
             },
             onload: function() {
+                console.log('Loaded GIF:', gifUrl);
                 this.style.display = 'block';
             }
         });
@@ -1371,16 +1398,19 @@ function renderWorkoutGuide() {
         
         // Add exercise GIF
         const gifName = key === 'hips9090' ? 'hips-9090' : key === 'hamstringFloss' ? 'hamstring-floss' : key === 'ankleRocks' ? 'ankle-rocks' : key === 'calfStretch' ? 'calf-stretch' : key === 'couchStretch' ? 'couch-stretch' : key;
+        const gifUrl = `${getBaseUrl()}pwa/exercises/${gifName}.gif?t=${Date.now()}`;
         const img = createElement('img', {
-            src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
+            src: gifUrl,
             alt: exercise.title,
             style: 'max-width: 100%; height: auto; margin: 12px 0; border-radius: 8px; display: none;',
             loading: 'lazy',
             onerror: function() {
+                console.log('Failed to load GIF:', gifUrl);
                 this.style.display = 'none';
                 this.onerror = null;
             },
             onload: function() {
+                console.log('Loaded GIF:', gifUrl);
                 this.style.display = 'block';
             }
         });

@@ -1,6 +1,6 @@
 // Service worker for offline support
 
-const CACHE_NAME = 'marathon-tracker-v2';
+const CACHE_NAME = 'marathon-tracker-v3';
 // Get base path for GitHub Pages
 const getBasePath = () => {
     // If we're on GitHub Pages, the path includes the repo name
@@ -49,8 +49,23 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
-    // Only handle GET requests for our app files
+    // Only handle GET requests
     if (event.request.method !== 'GET') return;
+    
+    const url = new URL(event.request.url);
+    
+    // Don't cache images - let them load fresh from network
+    // This prevents caching 404s and ensures images always load from GitHub Pages
+    if (url.pathname.match(/\.(gif|jpg|jpeg|png|webp|svg)$/i)) {
+        // For images, always fetch from network, don't use cache
+        event.respondWith(
+            fetch(event.request).catch(() => {
+                // If network fails, return a transparent pixel instead of cached 404
+                return new Response('', { status: 404, statusText: 'Not Found' });
+            })
+        );
+        return;
+    }
     
     event.respondWith(
         caches.match(event.request)
@@ -62,12 +77,15 @@ self.addEventListener('fetch', (event) => {
                         return fetchResponse;
                     }
                     
-                    // Clone the response for caching
-                    const responseToCache = fetchResponse.clone();
-                    
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, responseToCache);
-                    });
+                    // Only cache our app files, not images
+                    if (!url.pathname.match(/\.(gif|jpg|jpeg|png|webp|svg)$/i)) {
+                        // Clone the response for caching
+                        const responseToCache = fetchResponse.clone();
+                        
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
                     
                     return fetchResponse;
                 });
