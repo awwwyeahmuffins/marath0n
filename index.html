@@ -7,7 +7,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Marathon Tracker">
-    <link rel="manifest" href="pwa/manifest.json">
+    <script>
+        // Set manifest path dynamically for GitHub Pages
+        (function() {
+            const manifestLink = document.createElement('link');
+            manifestLink.rel = 'manifest';
+            if (window.location.hostname.includes('github.io')) {
+                manifestLink.href = '/marath0n/pwa/manifest.json';
+            } else {
+                manifestLink.href = 'pwa/manifest.json';
+            }
+            document.head.appendChild(manifestLink);
+        })();
+    </script>
     <!-- <link rel="apple-touch-icon" href="/pwa/icon-192.png"> -->
     <title>Marathon Training Tracker</title>
     <link rel="stylesheet" href="styles.css">
@@ -90,7 +102,11 @@
         // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('pwa/sw.js')
+                // Register service worker with correct path for GitHub Pages
+                const swPath = window.location.pathname.includes('/marath0n/') 
+                    ? '/marath0n/pwa/sw.js' 
+                    : 'pwa/sw.js';
+                navigator.serviceWorker.register(swPath)
                     .catch(err => console.log('SW registration failed:', err));
             });
         }
