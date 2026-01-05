@@ -331,10 +331,12 @@ async function renderToday() {
                         const kneeGifs = ['wall-sit', 'step-downs', 'soleus', 'band-walks'];
                         kneeGifs.forEach(gifName => {
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
+                                loading: 'lazy',
                                 onerror: function() {
+                                    // Silently hide missing images - don't spam console
                                     this.style.display = 'none';
                                     this.onerror = null; // Prevent repeated errors
                                 },
@@ -349,10 +351,12 @@ async function renderToday() {
                         const mobilityGifs = ['couch-stretch', 'calf-stretch', 'hamstring-floss', 'ankle-rocks', 'hips-9090'];
                         mobilityGifs.forEach(gifName => {
                             const img = createElement('img', {
-                                src: `pwa/exercises/${gifName}.gif`,
+                                src: `pwa/exercises/${gifName}.gif?t=${Date.now()}`,
                                 alt: gifName,
                                 style: 'max-width: 100%; height: auto; margin: 8px; border-radius: 8px; display: none;',
+                                loading: 'lazy',
                                 onerror: function() {
+                                    // Silently hide missing images - don't spam console
                                     this.style.display = 'none';
                                     this.onerror = null; // Prevent repeated errors
                                 },
